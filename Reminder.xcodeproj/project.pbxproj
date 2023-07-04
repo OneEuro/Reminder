@@ -8,18 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		E726FF792A52E63300D32152 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E726FF782A52E63300D32152 /* AppDelegate.swift */; };
-		E726FF7B2A52E63300D32152 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E726FF7A2A52E63300D32152 /* ViewController.swift */; };
 		E726FF7D2A52E63800D32152 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E726FF7C2A52E63800D32152 /* Assets.xcassets */; };
 		E726FF802A52E63800D32152 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E726FF7E2A52E63800D32152 /* Main.storyboard */; };
+		E726FF882A52E70500D32152 /* ReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E726FF872A52E70500D32152 /* ReminderViewController.swift */; };
+		E726FF8C2A52E82400D32152 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E726FF8B2A52E82400D32152 /* EventMonitor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E726FF752A52E63300D32152 /* Reminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E726FF782A52E63300D32152 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E726FF7A2A52E63300D32152 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E726FF7C2A52E63800D32152 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E726FF7F2A52E63800D32152 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E726FF812A52E63800D32152 /* Reminder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Reminder.entitlements; sourceTree = "<group>"; };
+		E726FF872A52E70500D32152 /* ReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderViewController.swift; sourceTree = "<group>"; };
+		E726FF8B2A52E82400D32152 /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +55,8 @@
 			isa = PBXGroup;
 			children = (
 				E726FF782A52E63300D32152 /* AppDelegate.swift */,
-				E726FF7A2A52E63300D32152 /* ViewController.swift */,
+				E726FF8B2A52E82400D32152 /* EventMonitor.swift */,
+				E726FF872A52E70500D32152 /* ReminderViewController.swift */,
 				E726FF7C2A52E63800D32152 /* Assets.xcassets */,
 				E726FF7E2A52E63800D32152 /* Main.storyboard */,
 				E726FF812A52E63800D32152 /* Reminder.entitlements */,
@@ -131,8 +134,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E726FF7B2A52E63300D32152 /* ViewController.swift in Sources */,
 				E726FF792A52E63300D32152 /* AppDelegate.swift in Sources */,
+				E726FF882A52E70500D32152 /* ReminderViewController.swift in Sources */,
+				E726FF8C2A52E82400D32152 /* EventMonitor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +272,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Reminder/Reminder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -275,6 +280,7 @@
 				DEVELOPMENT_TEAM = 69U2WLS9CL;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -282,6 +288,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.innotech.Reminder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -295,6 +302,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Reminder/Reminder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -302,6 +310,7 @@
 				DEVELOPMENT_TEAM = 69U2WLS9CL;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -309,6 +318,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.innotech.Reminder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
