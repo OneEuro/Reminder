@@ -81,6 +81,7 @@ extension ReminderViewController: UNUserNotificationCenterDelegate {
             timer?.invalidate()
             countdownTimer?.invalidate()
         }
+        print(countdownTimer?.isValid)
         completionHandler()
     }
 }
