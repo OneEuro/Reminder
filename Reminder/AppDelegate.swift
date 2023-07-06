@@ -12,12 +12,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     let popover = NSPopover()
     var eventMonitor: EventMonitor?
+    var reminderVC: ReminderViewController?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         if let button = statusItem.button {
             button.image = NSImage(named: "StatusBar")
             button.action = #selector(togglePopover(_:))
         }
+        
 
         popover.contentViewController = ReminderViewController.freshController()
 
@@ -28,9 +30,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
-    }
 
     @objc func togglePopover(_ sender: Any?) {
         if popover.isShown {
@@ -42,8 +41,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func showPopover(sender: Any?) {
         if let button = statusItem.button {
+     
+//            if let popoverVC = popover.contentViewController as? ReminderViewController {
+//                print(popoverVC,reminderVC)
+//                popoverVC.loadView()
+//                popoverVC.countdownLabel.stringValue  = reminderVC!.countdownLabel.stringValue
+//                popoverVC.timeIntervalTextField.stringValue = reminderVC!.timeIntervalTextField.stringValue
+//            }
+
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
             eventMonitor?.start()
+           
         }
     }
 

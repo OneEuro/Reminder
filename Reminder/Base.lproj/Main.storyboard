@@ -125,10 +125,10 @@
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
         </scene>
-        <!--Reminder View Controller-->
+        <!--ReminderViewController-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController storyboardIdentifier="ReminderViewController" id="XfG-lQ-9wD" customClass="ReminderViewController" customModule="Reminder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="ReminderViewController" storyboardIdentifier="ReminderViewController" id="XfG-lQ-9wD" customClass="ReminderViewController" customModule="Reminder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>

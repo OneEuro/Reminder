@@ -12,6 +12,8 @@
 		E726FF802A52E63800D32152 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E726FF7E2A52E63800D32152 /* Main.storyboard */; };
 		E726FF882A52E70500D32152 /* ReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E726FF872A52E70500D32152 /* ReminderViewController.swift */; };
 		E726FF8C2A52E82400D32152 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E726FF8B2A52E82400D32152 /* EventMonitor.swift */; };
+		E7995C192A57169E00537F2F /* TimerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7995C182A57169E00537F2F /* TimerConfiguration.swift */; };
+		E7995C1B2A571C3B00537F2F /* NotificationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7995C1A2A571C3B00537F2F /* NotificationItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		E726FF812A52E63800D32152 /* Reminder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Reminder.entitlements; sourceTree = "<group>"; };
 		E726FF872A52E70500D32152 /* ReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderViewController.swift; sourceTree = "<group>"; };
 		E726FF8B2A52E82400D32152 /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
+		E7995C182A57169E00537F2F /* TimerConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerConfiguration.swift; sourceTree = "<group>"; };
+		E7995C1A2A571C3B00537F2F /* NotificationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,8 @@
 				E726FF782A52E63300D32152 /* AppDelegate.swift */,
 				E726FF8B2A52E82400D32152 /* EventMonitor.swift */,
 				E726FF872A52E70500D32152 /* ReminderViewController.swift */,
+				E7995C182A57169E00537F2F /* TimerConfiguration.swift */,
+				E7995C1A2A571C3B00537F2F /* NotificationItem.swift */,
 				E726FF7C2A52E63800D32152 /* Assets.xcassets */,
 				E726FF7E2A52E63800D32152 /* Main.storyboard */,
 				E726FF812A52E63800D32152 /* Reminder.entitlements */,
@@ -134,6 +140,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7995C192A57169E00537F2F /* TimerConfiguration.swift in Sources */,
+				E7995C1B2A571C3B00537F2F /* NotificationItem.swift in Sources */,
 				E726FF792A52E63300D32152 /* AppDelegate.swift in Sources */,
 				E726FF882A52E70500D32152 /* ReminderViewController.swift in Sources */,
 				E726FF8C2A52E82400D32152 /* EventMonitor.swift in Sources */,
