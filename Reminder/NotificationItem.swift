@@ -9,8 +9,8 @@ import Cocoa
 import UserNotifications
 
 class NotificationItem:NSObject {
-    let content =  UNMutableNotificationContent()
-    public var timerConfig:TimerConfiguration?
+    private let content =  UNMutableNotificationContent()
+    var timerConfig: TimerConfiguration?
     
     init(title:String,body:String,sound:UNNotificationSound,categoryIdentifier:String) {
         super.init()
@@ -20,11 +20,11 @@ class NotificationItem:NSObject {
         self.content.categoryIdentifier = categoryIdentifier
         
         UNUserNotificationCenter.current().delegate = self
-        print("Notification \(self) is inited")
+//        print("Notification \(self) is inited")
     }
     
     deinit {
-        print("Notification \(self) is deinited")
+//        print("Notification \(self) is deinited")
     }
     
     static func createRequestAuthorization () {
@@ -45,11 +45,16 @@ class NotificationItem:NSObject {
         let request = UNNotificationRequest(identifier: "reminder", content: content, trigger: trigger)
 
         UNUserNotificationCenter.current().add(request) { error in
-            if let error = error {
+            if let error = error {  
                 print("Error scheduling notification: \(error.localizedDescription)")
             }
         }
     }
+    
+}
+
+
+protocol TimerHandleDelegate {
     
 }
 
@@ -58,25 +63,10 @@ extension NotificationItem:UNUserNotificationCenterDelegate {
         if let timer = timerConfig,response.actionIdentifier == "stopAction" {
             timer.timer?.invalidate()
             timer.countdownTimer?.invalidate()
+            timer.timer = nil
+            timer.countdownTimer = nil
         }
-//        print("coutdowntimer = ",timer.countdownTimer?.isValid)
         completionHandler()
-//        let actionIdentifier = response.actionIdentifier
-//
-//           switch actionIdentifier {
-//           case UNNotificationDismissActionIdentifier: // Notification was dismissed by user
-//               // Do something
-//               completionHandler()
-//               print("notif dismissed")
-//           case UNNotificationDefaultActionIdentifier: // App was opened from notification
-//               // Do something
-//               completionHandler()
-//               print("notif open app")
-//           default:
-//               completionHandler()
-//           }
     }
-    
-    
 }
 

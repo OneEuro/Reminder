@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="XfG-lQ-9wD">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -55,31 +56,6 @@
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="Window" id="aUF-d1-5bR">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Window" systemMenu="window" id="Td7-aD-5lo">
-                                    <items>
-                                        <menuItem title="Minimize" keyEquivalent="m" id="OY7-WF-poV">
-                                            <connections>
-                                                <action selector="performMiniaturize:" target="Ady-hI-5gd" id="VwT-WD-YPe"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Zoom" id="R4o-n2-Eq4">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="performZoom:" target="Ady-hI-5gd" id="DIl-cC-cCs"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
-                                        <menuItem title="Bring All to Front" id="LE2-aR-0XJ">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="arrangeInFront:" target="Ady-hI-5gd" id="DRN-fu-gQh"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
-                            </menuItem>
                             <menuItem title="Help" id="wpr-3q-Mcd">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
@@ -104,48 +80,25 @@
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>
-        <!--Window Controller-->
-        <scene sceneID="R2V-B0-nI4">
-            <objects>
-                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
-                        <connections>
-                            <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
-                        </connections>
-                    </window>
-                    <connections>
-                        <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
-                    </connections>
-                </windowController>
-                <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="75" y="250"/>
-        </scene>
         <!--ReminderViewController-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController title="ReminderViewController" storyboardIdentifier="ReminderViewController" id="XfG-lQ-9wD" customClass="ReminderViewController" customModule="Reminder" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="ReminderViewController" storyboardIdentifier="ReminderViewController" showSeguePresentationStyle="single" id="XfG-lQ-9wD" customClass="ReminderViewController" customModule="Reminder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AyE-lT-yMv">
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AyE-lT-yMv">
                                 <rect key="frame" x="192" y="124" width="96" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="Vro-8B-rxR">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="29p-Md-JeN">
-                                <rect key="frame" x="202" y="66" width="76" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aq3-ue-lfR">
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="29p-Md-JeN">
+                                <rect key="frame" x="208" y="66" width="64" height="32"/>
+                                <buttonCell key="cell" type="push" title="Start" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aq3-ue-lfR">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -155,23 +108,81 @@
                             </button>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Ia-rj-OQe">
                                 <rect key="frame" x="336" y="190" width="96" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="9y9-qP-tbd">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sdi-2X-3Tz">
+                                <rect key="frame" x="209" y="13" width="63" height="32"/>
+                                <buttonCell key="cell" type="push" title="Stop" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="A8x-W7-9lk">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="stopTimer:" target="XfG-lQ-9wD" id="o6t-oG-Sv5"/>
+                                </connections>
+                            </button>
+                            <datePicker verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Vz-lK-i8w">
+                                <rect key="frame" x="54" y="88" width="122" height="123"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <datePickerCell key="cell" borderStyle="bezel" alignment="left" datePickerStyle="clockAndCalendar" useCurrentDate="YES" id="vhB-Zl-2b5">
+                                    <font key="font" metaFont="system"/>
+                                    <date key="date" timeIntervalSinceReferenceDate="733667101.93127096">
+                                        <!--2024-04-01 12:25:01 +0000-->
+                                    </date>
+                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <datePickerElements key="datePickerElements" hour="YES" minute="YES" second="YES"/>
+                                </datePickerCell>
+                            </datePicker>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Y32-yw-tBx">
+                                <rect key="frame" x="216" y="201" width="37" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="FN1-9T-hjg">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="u4x-Wi-YzR">
+                                <rect key="frame" x="48" y="223" width="75" height="32"/>
+                                <buttonCell key="cell" type="push" title="Выход" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rbk-q4-ixD">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="closeProgram:" target="XfG-lQ-9wD" id="no9-ti-adf"/>
+                                </connections>
+                            </button>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="AyE-lT-yMv" secondAttribute="trailing" constant="192" id="05W-PO-aWY"/>
+                            <constraint firstItem="sdi-2X-3Tz" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="5G0-f7-9Zw"/>
+                            <constraint firstItem="AyE-lT-yMv" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="192" id="62d-yX-fIt"/>
+                            <constraint firstItem="u4x-Wi-YzR" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" symbolic="YES" id="6jd-h4-Poo"/>
+                            <constraint firstItem="u4x-Wi-YzR" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="55" id="DgR-Wj-Vvm"/>
+                            <constraint firstItem="AyE-lT-yMv" firstAttribute="top" secondItem="Y32-yw-tBx" secondAttribute="bottom" constant="56" id="Hha-lI-mb9"/>
+                            <constraint firstItem="Y32-yw-tBx" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="53" id="LKQ-O5-mRO"/>
+                            <constraint firstItem="Y32-yw-tBx" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="218" id="TCG-3n-Qi9"/>
+                            <constraint firstItem="29p-Md-JeN" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="YeC-xJ-aag"/>
+                            <constraint firstItem="sdi-2X-3Tz" firstAttribute="top" secondItem="29p-Md-JeN" secondAttribute="bottom" constant="33" id="ohQ-BD-kaD"/>
+                            <constraint firstAttribute="trailing" secondItem="Y32-yw-tBx" secondAttribute="trailing" constant="229" id="tQE-hC-pCC"/>
+                            <constraint firstItem="29p-Md-JeN" firstAttribute="top" secondItem="AyE-lT-yMv" secondAttribute="bottom" constant="31" id="uFb-T2-dXo"/>
+                            <constraint firstAttribute="bottom" secondItem="sdi-2X-3Tz" secondAttribute="bottom" constant="20" symbolic="YES" id="y2O-FU-wEn"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="countdownLabel" destination="0Ia-rj-OQe" id="PfQ-vW-6q8"/>
                         <outlet property="timeIntervalTextField" destination="AyE-lT-yMv" id="ieJ-dO-gn6"/>
+                        <outlet property="timePicker" destination="0Vz-lK-i8w" id="NDd-0B-Zbv"/>
+                        <outlet property="timerPickerLabel" destination="Y32-yw-tBx" id="jtL-mR-ltv"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="74" y="225"/>
         </scene>
     </scenes>
 </document>

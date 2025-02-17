@@ -11,17 +11,17 @@ import Cocoa
 class TimerConfiguration: NSObject {
     var timer: Timer?
     var countdownTimer: Timer?
-    var remainingTime: TimeInterval = 0
-    var timeInterval:TimeInterval = 0
-    public var  reminderViewController :ReminderViewController?
-    private  var notification:NotificationItem?
+    private var remainingTime: TimeInterval = 0
+    private var timeInterval: TimeInterval = 0
+    private var notificationItem: NotificationItem?
+    public var  reminderViewController: ReminderViewController?
     
     
     public func updateTimeInterval(with:String)  {
         if let interval = TimeInterval(with) {
             timeInterval = interval
             remainingTime = timeInterval
-            reminderViewController?.updateCountdownLabel(remainingTime: self.timeInterval)
+//            reminderViewController?.updateCountdownLabel(remainingTime: self.timeInterval)
         } else {
             print("Invalid time interval")
             return
@@ -29,38 +29,39 @@ class TimerConfiguration: NSObject {
     }
     
     public func createNotification() {
-         notification = NotificationItem(title: "Reminder", body: "It's time!", sound: .default, categoryIdentifier: "reminderCategory")
-        guard notification != nil else {
+        notificationItem = NotificationItem(title: "Reminder", body: "It's time!", sound: .default, categoryIdentifier: "reminderCategory")
+        guard let notification = notificationItem else {
             print("faild to init Notification")
             return
         }
-        notification!.configNotificationCenter()
-        notification!.timerConfig = self
+        notification.configNotificationCenter()
+        notification.timerConfig = self
        
     }
     
     public func createTimer()  {
         timer?.invalidate()
+        timer = nil
         self.remainingTime = self.timeInterval
         timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true) { _ in
-           
-//            self.reminderViewController?.updateCountdownLabel(remainingTime: self.timeInterval)
             self.createNotification()
         }
-        
     }
     
     public func createCountdownTimer() {
         countdownTimer?.invalidate()
-//        reminderViewController?.updateCountdownLabel(remainingTime: timeInterval + 1 )
-        countdownTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            if self.remainingTime < 1 {
-                self.remainingTime = self.timeInterval
-            }else {
-                self.remainingTime -= 1
+        countdownTimer = nil
+        countdownTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
+            if let remainingTime = self?.remainingTime, let timeInterval = self?.timeInterval {
+                if remainingTime < 1 {
+                    self?.remainingTime = timeInterval
+                    self?.reminderViewController?.updateCountdownLabel(remainingTime: timeInterval)
+                } else {
+                    self?.reminderViewController?.updateCountdownLabel(remainingTime: remainingTime)
+
+                }
             }
-          
-                self.reminderViewController?.updateCountdownLabel(remainingTime: self.remainingTime)
+            self?.remainingTime -= 1
             }
     }
     
