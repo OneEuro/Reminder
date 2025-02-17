@@ -60,13 +60,13 @@ protocol TimerHandleDelegate {
 
 extension NotificationItem:UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        if let timer = timerConfig,response.actionIdentifier == "stopAction" {
-            timer.timer?.invalidate()
-            timer.countdownTimer?.invalidate()
-            timer.timer = nil
-            timer.countdownTimer = nil
-        }
-        completionHandler()
+        // Handle the "Stop" action
+           if response.actionIdentifier == "stopAction" {
+               timerConfig?.invalidateTimers()
+           }
+
+           // Call the completion handler
+           completionHandler()
     }
 }
 

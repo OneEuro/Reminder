@@ -7,59 +7,76 @@
 
 import Cocoa
  
+import Cocoa
+
 class ReminderViewController: NSViewController {
+
+    // MARK: - IBOutlets
+
     @IBOutlet weak var timeIntervalTextField: NSTextField!
     @IBOutlet weak var countdownLabel: NSTextField!
-//    var pickerView: NSView = {
-//        let pickerView = DateTimePickerView(frame: NSRect(x: 10, y: 50, width: 100, height: 100))
-//        return pickerView
-//    }()
-    
-    @IBOutlet weak var timerPickerLabel: NSTextField!
     @IBOutlet weak var timePicker: NSDatePicker!
-    var timerConfiguration = TimerConfiguration()
+
+    // MARK: - Properties
+
+    private var timerConfiguration = TimerConfiguration()
+
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationItem.createRequestAuthorization()
+        setupNotificationAuthorization()
         timerConfiguration.reminderViewController = self
-        
-//        view.addSubview(pickerView)
     }
+
+    // MARK: - Setup
+
+    /// Requests authorization for notifications.
+    private func setupNotificationAuthorization() {
+        NotificationItem.createRequestAuthorization()
+    }
+
+    // MARK: - IBActions
 
     @IBAction func setReminder(_ sender: NSButton) {
-        timerConfiguration.updateTimeInterval(with: timeIntervalTextField.stringValue)
-        timerConfiguration.createTimer()
-        timerConfiguration.createCountdownTimer()
-        
-        let minutes = timePicker.dateValue.timeIntervalSinceNow
-        print(minutes)
-        let seconds = timePicker.timeInterval
-//        let hour = minutes / 60.0
-//        timerPickerLabel.stringValue = String(format: "%02d:%02d:%02d", minutes, seconds, hour)
+        guard let timeInterval = TimeInterval(timeIntervalTextField.stringValue) else {
+            showAlert(message: "Invalid time interval. Please enter a valid number.")
+            return
+        }
 
+        let selectedTimeInterval = timePicker.dateValue.timeIntervalSinceNow
+        guard selectedTimeInterval > 0 else {
+            showAlert(message: "Please select a future time.")
+            return
+        }
+
+        timerConfiguration.updateTimeInterval(with: timeInterval)
+        timerConfiguration.createTimer()
     }
-    
+
     @IBAction func stopTimer(_ sender: NSButton) {
-        timerConfiguration.timer?.invalidate()
-        timerConfiguration.countdownTimer?.invalidate()
-        timerConfiguration.timer = nil
-        timerConfiguration.countdownTimer = nil
+        timerConfiguration.invalidateTimers()
     }
-    
+
     @IBAction func closeProgram(_ sender: Any) {
         NSApp.terminate(sender)
     }
-    func updateCountdownLabel(remainingTime:TimeInterval) {
+
+    // MARK: - Helper Methods
+
+    /// Updates the countdown label with the remaining time.
+    func updateCountdownLabel(remainingTime: TimeInterval) {
         let minutes = Int(remainingTime) / 60
         let seconds = Int(remainingTime) % 60
         countdownLabel.stringValue = String(format: "%02d:%02d", minutes, seconds)
     }
-    
-    func createPickerView() {
-       
+
+    /// Displays an alert with the given message.
+    private func showAlert(message: String) {
+        let alert = NSAlert()
+        alert.messageText = message
+        alert.alertStyle = .warning
+        alert.addButton(withTitle: "OK")
+        alert.runModal()
     }
-    
-    
 }
-    
