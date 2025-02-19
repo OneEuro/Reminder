@@ -18,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18ACB30D2D663E1B00DF9FC6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		E726FF752A52E63300D32152 /* Reminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E726FF782A52E63300D32152 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E726FF7C2A52E63800D32152 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -44,6 +45,7 @@
 		E726FF6C2A52E63300D32152 = {
 			isa = PBXGroup;
 			children = (
+				18ACB30D2D663E1B00DF9FC6 /* .gitignore */,
 				E726FF772A52E63300D32152 /* Reminder */,
 				E726FF762A52E63300D32152 /* Products */,
 			);
