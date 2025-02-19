@@ -15,7 +15,6 @@ class ReminderViewController: NSViewController {
 
     @IBOutlet weak var timeIntervalTextField: NSTextField!
     @IBOutlet weak var countdownLabel: NSTextField!
-    @IBOutlet weak var timePicker: NSDatePicker!
 
     // MARK: - Properties
 
@@ -44,11 +43,6 @@ class ReminderViewController: NSViewController {
             return
         }
 
-        let selectedTimeInterval = timePicker.dateValue.timeIntervalSinceNow
-        guard selectedTimeInterval > 0 else {
-            showAlert(message: "Please select a future time.")
-            return
-        }
 
         timerConfiguration.updateTimeInterval(with: timeInterval)
         timerConfiguration.createTimer()

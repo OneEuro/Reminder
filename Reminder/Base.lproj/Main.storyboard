@@ -125,19 +125,6 @@
                                     <action selector="stopTimer:" target="XfG-lQ-9wD" id="o6t-oG-Sv5"/>
                                 </connections>
                             </button>
-                            <datePicker verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Vz-lK-i8w">
-                                <rect key="frame" x="54" y="88" width="122" height="123"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <datePickerCell key="cell" borderStyle="bezel" alignment="left" datePickerStyle="clockAndCalendar" useCurrentDate="YES" id="vhB-Zl-2b5">
-                                    <font key="font" metaFont="system"/>
-                                    <date key="date" timeIntervalSinceReferenceDate="761603378.40836704">
-                                        <!--2025-02-18 20:29:38 +0000-->
-                                    </date>
-                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <datePickerElements key="datePickerElements" hour="YES" minute="YES" second="YES"/>
-                                </datePickerCell>
-                            </datePicker>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Y32-yw-tBx">
                                 <rect key="frame" x="216" y="201" width="37" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="FN1-9T-hjg">
@@ -176,7 +163,6 @@
                     <connections>
                         <outlet property="countdownLabel" destination="0Ia-rj-OQe" id="PfQ-vW-6q8"/>
                         <outlet property="timeIntervalTextField" destination="AyE-lT-yMv" id="ieJ-dO-gn6"/>
-                        <outlet property="timePicker" destination="0Vz-lK-i8w" id="NDd-0B-Zbv"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
