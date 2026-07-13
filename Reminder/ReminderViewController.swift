@@ -18,6 +18,8 @@ class ReminderViewController: NSViewController {
 
     private var stopButtonTrailing: NSLayoutConstraint?
     private var stopButtonCenter: NSLayoutConstraint?
+    private var startButtonLeading: NSLayoutConstraint?
+    private var startButtonCenter: NSLayoutConstraint?
 
     // MARK: - Lifecycle
 
@@ -105,6 +107,9 @@ class ReminderViewController: NSViewController {
         countdownLabel.translatesAutoresizingMaskIntoConstraints = false
         countdownLabel.isEditable = false
         countdownLabel.isBordered = false
+        countdownLabel.isBezeled = false
+        countdownLabel.drawsBackground = false
+        countdownLabel.backgroundColor = .clear
         countdownLabel.alignment = .center
         countdownLabel.font = .monospacedDigitSystemFont(ofSize: 64, weight: .thin)
         countdownLabel.stringValue = "00:00"
@@ -124,6 +129,8 @@ class ReminderViewController: NSViewController {
         startButton.action = #selector(startTimer)
         startButton.target = self
         self.view.addSubview(startButton)
+
+        stopButton.isHidden = true
 
         stopButton.translatesAutoresizingMaskIntoConstraints = false
         stopButton.isBordered = false
@@ -164,13 +171,16 @@ class ReminderViewController: NSViewController {
             stopButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20),
 
             startButton.topAnchor.constraint(equalTo: timePicker.bottomAnchor, constant: 8),
-            startButton.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 10),
             startButton.widthAnchor.constraint(equalToConstant: 44),
             startButton.heightAnchor.constraint(equalToConstant: 44),
         ])
         self.stopButtonTrailing = stopButton.trailingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: -10)
         self.stopButtonCenter = stopButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
         self.stopButtonTrailing?.isActive = true
+
+        self.startButtonLeading = startButton.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 10)
+        self.startButtonCenter = startButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+        self.startButtonCenter?.isActive = true
     }
 
     // MARK: - Picker / Countdown toggle
@@ -178,11 +188,11 @@ class ReminderViewController: NSViewController {
     private func showPicker() {
         self.timePicker.isHidden = false
         self.countdownLabel.isHidden = true
+        self.stopButton.isHidden = true
         self.startButton.isHidden = false
-        self.stopButton.isEnabled = false
         if let trailing = self.stopButtonTrailing, let center = self.stopButtonCenter {
-            NSLayoutConstraint.deactivate([center])
-            NSLayoutConstraint.activate([trailing])
+            NSLayoutConstraint.deactivate([center, self.startButtonLeading].compactMap { $0 })
+            NSLayoutConstraint.activate([trailing, self.startButtonCenter].compactMap { $0 })
         }
     }
 
@@ -190,10 +200,11 @@ class ReminderViewController: NSViewController {
         self.timePicker.isHidden = true
         self.countdownLabel.isHidden = false
         self.startButton.isHidden = true
+        self.stopButton.isHidden = false
         self.stopButton.isEnabled = true
         if let trailing = self.stopButtonTrailing, let center = self.stopButtonCenter {
-            NSLayoutConstraint.deactivate([trailing])
-            NSLayoutConstraint.activate([center])
+            NSLayoutConstraint.deactivate([trailing, self.startButtonCenter].compactMap { $0 })
+            NSLayoutConstraint.activate([center, self.startButtonLeading].compactMap { $0 })
         }
     }
 
