@@ -14,6 +14,11 @@ class ReminderViewController: NSViewController {
 
     private var timerConfiguration = TimerConfiguration()
 
+    private var previewTimer: Timer?
+
+    private var stopButtonTrailing: NSLayoutConstraint?
+    private var stopButtonCenter: NSLayoutConstraint?
+
     // MARK: - Lifecycle
 
     override func loadView() {
@@ -29,6 +34,27 @@ class ReminderViewController: NSViewController {
         setupConstraints()
         SettingsManager.shared.register(self.timePicker)
         NotificationItem.createRequestAuthorization()
+        startPreviewTimer()
+    }
+
+    private func startPreviewTimer() {
+        self.previewTimer?.invalidate()
+        self.previewTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
+            self?.updatePreviewLabel()
+        }
+    }
+
+    private func updatePreviewLabel() {
+        guard self.countdownLabel.isHidden else { return }
+        guard let selected = self.timePicker.selectedTime else {
+            self.countdownLabel.stringValue = "00:00"
+            return
+        }
+        if selected.hour > 0 {
+            self.countdownLabel.stringValue = String(format: "%d:%02d:%02d", selected.hour, selected.minute, selected.second)
+        } else {
+            self.countdownLabel.stringValue = String(format: "%02d:%02d", selected.minute, selected.second)
+        }
     }
 
     // MARK: - Setup
@@ -57,11 +83,12 @@ class ReminderViewController: NSViewController {
 
         countdownLabel.translatesAutoresizingMaskIntoConstraints = false
         countdownLabel.isEditable = false
-        countdownLabel.isBordered = true
+        countdownLabel.isBordered = false
         countdownLabel.alignment = .center
-        countdownLabel.font = .monospacedDigitSystemFont(ofSize: 16, weight: .medium)
+        countdownLabel.font = .monospacedDigitSystemFont(ofSize: 64, weight: .thin)
         countdownLabel.stringValue = "00:00"
         countdownLabel.textColor = .white
+        countdownLabel.isHidden = true
         self.view.addSubview(countdownLabel)
 
         startButton.translatesAutoresizingMaskIntoConstraints = false
@@ -106,12 +133,10 @@ class ReminderViewController: NSViewController {
             timePicker.widthAnchor.constraint(equalToConstant: 260),
             timePicker.heightAnchor.constraint(equalToConstant: 170),
 
-            countdownLabel.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
-            countdownLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 40),
-            countdownLabel.widthAnchor.constraint(equalToConstant: 70),
+            countdownLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            countdownLabel.centerYAnchor.constraint(equalTo: self.timePicker.centerYAnchor),
 
             stopButton.topAnchor.constraint(equalTo: timePicker.bottomAnchor, constant: 8),
-            stopButton.trailingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: -10),
             stopButton.widthAnchor.constraint(equalToConstant: 44),
             stopButton.heightAnchor.constraint(equalToConstant: 44),
             stopButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20),
@@ -121,6 +146,31 @@ class ReminderViewController: NSViewController {
             startButton.widthAnchor.constraint(equalToConstant: 44),
             startButton.heightAnchor.constraint(equalToConstant: 44),
         ])
+        self.stopButtonTrailing = stopButton.trailingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: -10)
+        self.stopButtonCenter = stopButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+        self.stopButtonTrailing?.isActive = true
+    }
+
+    // MARK: - Picker / Countdown toggle
+
+    private func showPicker() {
+        self.timePicker.isHidden = false
+        self.countdownLabel.isHidden = true
+        self.startButton.isHidden = false
+        if let trailing = self.stopButtonTrailing, let center = self.stopButtonCenter {
+            NSLayoutConstraint.deactivate([center])
+            NSLayoutConstraint.activate([trailing])
+        }
+    }
+
+    private func showCountdown() {
+        self.timePicker.isHidden = true
+        self.countdownLabel.isHidden = false
+        self.startButton.isHidden = true
+        if let trailing = self.stopButtonTrailing, let center = self.stopButtonCenter {
+            NSLayoutConstraint.deactivate([trailing])
+            NSLayoutConstraint.activate([center])
+        }
     }
 
     // MARK: - Actions
@@ -129,12 +179,15 @@ class ReminderViewController: NSViewController {
         guard let selected = timePicker.selectedTime else { return }
         let totalSeconds = TimeInterval(selected.hour * 3600 + selected.minute * 60 + selected.second)
         guard totalSeconds > 0 else { return }
+        self.countdownLabel.stringValue = self.timerConfiguration.remainingTimeString(from: totalSeconds)
+        showCountdown()
         self.timerConfiguration.updateTimeInterval(with: totalSeconds)
         self.timerConfiguration.createTimer()
     }
 
     @objc private func stopTimer() {
         self.timerConfiguration.invalidateTimers()
+        showPicker()
     }
 
     @objc private func closeProgram() {
@@ -144,9 +197,18 @@ class ReminderViewController: NSViewController {
     // MARK: - Countdown
 
     func updateCountdownLabel(remainingTime: TimeInterval) {
-        let minutes = Int(remainingTime) / 60
-        let seconds = Int(remainingTime) % 60
-        self.countdownLabel.stringValue = String(format: "%02d:%02d", minutes, seconds)
+        let totalSeconds = Int(remainingTime)
+        let hours = totalSeconds / 3600
+        let minutes = (totalSeconds % 3600) / 60
+        let seconds = totalSeconds % 60
+        if hours > 0 {
+            self.countdownLabel.stringValue = String(format: "%d:%02d:%02d", hours, minutes, seconds)
+        } else {
+            self.countdownLabel.stringValue = String(format: "%02d:%02d", minutes, seconds)
+        }
+        if totalSeconds <= 0 {
+            showPicker()
+        }
     }
 }
 

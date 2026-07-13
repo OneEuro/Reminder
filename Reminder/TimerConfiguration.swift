@@ -19,6 +19,10 @@ class TimerConfiguration: NSObject {
 
     // MARK: - Public Methods
 
+    var isRunning: Bool {
+        self.timer != nil || self.countdownTimer != nil
+    }
+
     /// Updates the time interval for the timer.
        /// - Parameter interval: The time interval in seconds.
        public func updateTimeInterval(with interval: TimeInterval) {
@@ -82,6 +86,17 @@ class TimerConfiguration: NSObject {
                 self.countdownTimer = nil
             }
         }
+    }
+
+    func remainingTimeString(from totalSeconds: TimeInterval) -> String {
+        let total = Int(totalSeconds)
+        let hours = total / 3600
+        let minutes = (total % 3600) / 60
+        let seconds = total % 60
+        if hours > 0 {
+            return String(format: "%d:%02d:%02d", hours, minutes, seconds)
+        }
+        return String(format: "%02d:%02d", minutes, seconds)
     }
 
     /// Invalidates all active timers.
