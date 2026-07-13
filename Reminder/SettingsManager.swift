@@ -23,6 +23,11 @@ final class SettingsManager {
         }
     }
 
+    var notificationRepeatInterval: TimeInterval {
+        get { defaults.double(forKey: "notificationRepeatInterval") }
+        set { defaults.set(newValue, forKey: "notificationRepeatInterval") }
+    }
+
     private var timePickers: [DrumrollTimePicker] = []
 
     private init() {
@@ -33,6 +38,7 @@ final class SettingsManager {
         defaults.register(defaults: [
             "isInfiniteScrollEnabled": false,
             "isScrollDirectionInverted": true,
+            "notificationRepeatInterval": 3.0,
         ])
     }
 

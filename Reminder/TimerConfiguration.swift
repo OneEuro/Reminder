@@ -1,16 +1,12 @@
-//
-//  TimerConfiguration.swift
-//  Reminder
-//
-//  Created by Владимир Малышев on 06.07.2023.
-//
 import Cocoa
+import UserNotifications
 
 class TimerConfiguration: NSObject {
     // MARK: - Properties
 
     private var timer: Timer?
     private var countdownTimer: Timer?
+    private var notificationRepeatTimer: Timer?
     private var remainingTime: TimeInterval = 0
     private var timeInterval: TimeInterval = 0
     private var notificationItem: NotificationItem?
@@ -20,30 +16,27 @@ class TimerConfiguration: NSObject {
     // MARK: - Public Methods
 
     var isRunning: Bool {
-        self.timer != nil || self.countdownTimer != nil
+        self.timer != nil || self.countdownTimer != nil || self.notificationRepeatTimer != nil
     }
 
-    /// Updates the time interval for the timer.
-       /// - Parameter interval: The time interval in seconds.
-       public func updateTimeInterval(with interval: TimeInterval) {
-           guard interval > 0 else {
-               print("Invalid time interval. Please provide a positive number.")
-               return
-           }
-           timeInterval = interval
-           remainingTime = timeInterval
-       }
+    public func updateTimeInterval(with interval: TimeInterval) {
+        guard interval > 0 else {
+            print("Invalid time interval. Please provide a positive number.")
+            return
+        }
+        self.timeInterval = interval
+        self.remainingTime = self.timeInterval
+    }
 
-    /// Creates a notification to remind the user when the timer completes.
     public func createNotification() {
-        notificationItem = NotificationItem(
+        self.notificationItem = NotificationItem(
             title: "Reminder",
             body: "It's time!",
             sound: .default,
             categoryIdentifier: "reminderCategory"
         )
 
-        guard let notification = notificationItem else {
+        guard let notification = self.notificationItem else {
             print("Failed to initialize notification.")
             return
         }
@@ -52,40 +45,51 @@ class TimerConfiguration: NSObject {
         notification.timerConfig = self
     }
 
-    /// Creates a timer that triggers a notification when it completes.
     public func createTimer() {
-        // Invalidate existing timers
         invalidateTimers()
 
-        // Reset remaining time
-        remainingTime = timeInterval
+        self.remainingTime = self.timeInterval
 
-        // Schedule the main timer
-        timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: false) { [weak self] _ in
-            self?.createNotification()
+        self.timer = Timer.scheduledTimer(withTimeInterval: self.timeInterval, repeats: false) { [weak self] _ in
+            guard let self = self else { return }
+            self.timer = nil
+            self.countdownTimer?.invalidate()
+            self.countdownTimer = nil
+            self.reminderViewController?.showPicker()
+            self.createNotification()
+            self.startNotificationRepeat()
         }
 
-        // Schedule the countdown timer
         createCountdownTimer()
     }
 
-    /// Creates a countdown timer to update the UI every second.
     internal func createCountdownTimer() {
-        countdownTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
+        self.countdownTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
             guard let self = self else { return }
 
-            // Update the remaining time
             self.remainingTime -= 1
-
-            // Update the countdown label
             self.reminderViewController?.updateCountdownLabel(remainingTime: self.remainingTime)
 
-            // Stop the countdown timer if the time is up
             if self.remainingTime <= 0 {
                 self.countdownTimer?.invalidate()
                 self.countdownTimer = nil
             }
         }
+    }
+
+    private func startNotificationRepeat() {
+        let interval = SettingsManager.shared.notificationRepeatInterval
+        guard interval > 0 else { return }
+        self.notificationRepeatTimer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { [weak self] _ in
+            self?.createNotification()
+        }
+    }
+
+    private func stopNotificationRepeat() {
+        self.notificationRepeatTimer?.invalidate()
+        self.notificationRepeatTimer = nil
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
     }
 
     func remainingTimeString(from totalSeconds: TimeInterval) -> String {
@@ -99,11 +103,11 @@ class TimerConfiguration: NSObject {
         return String(format: "%02d:%02d", minutes, seconds)
     }
 
-    /// Invalidates all active timers.
-       public func invalidateTimers() {
-           timer?.invalidate()
-           countdownTimer?.invalidate()
-           timer = nil
-           countdownTimer = nil
-       }
+    public func invalidateTimers() {
+        self.timer?.invalidate()
+        self.countdownTimer?.invalidate()
+        self.timer = nil
+        self.countdownTimer = nil
+        stopNotificationRepeat()
+    }
 }

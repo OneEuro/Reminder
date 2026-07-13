@@ -124,7 +124,7 @@ class ReminderViewController: NSViewController {
         startButton.layer?.cornerRadius = 22
         startButton.attributedTitle = NSAttributedString(string: "Start", attributes: [
             .foregroundColor: NSColor.systemGreen,
-            .font: NSFont.boldSystemFont(ofSize: 13),
+            .font: NSFont.systemFont(ofSize: 13),
         ])
         startButton.action = #selector(startTimer)
         startButton.target = self
@@ -139,7 +139,7 @@ class ReminderViewController: NSViewController {
         stopButton.layer?.cornerRadius = 22
         stopButton.attributedTitle = NSAttributedString(string: "Stop", attributes: [
             .foregroundColor: NSColor.systemRed,
-            .font: NSFont.boldSystemFont(ofSize: 13),
+            .font: NSFont.systemFont(ofSize: 13),
         ])
         stopButton.isEnabled = false
         stopButton.action = #selector(stopTimer)
@@ -185,7 +185,7 @@ class ReminderViewController: NSViewController {
 
     // MARK: - Picker / Countdown toggle
 
-    private func showPicker() {
+    func showPicker() {
         self.timePicker.isHidden = false
         self.countdownLabel.isHidden = true
         self.stopButton.isHidden = true
@@ -196,7 +196,7 @@ class ReminderViewController: NSViewController {
         }
     }
 
-    private func showCountdown() {
+    func showCountdown() {
         self.timePicker.isHidden = true
         self.countdownLabel.isHidden = false
         self.startButton.isHidden = true

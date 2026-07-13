@@ -27,13 +27,14 @@ class NotificationItem: NSObject {
     }
 
     func configNotificationCenter() {
-        let stopAction = UNNotificationAction(identifier: "stopAction", title: "Stop", options: [])
+        let stopAction = UNNotificationAction(identifier: "stopAction", title: "Stop", options: [.foreground])
         let category = UNNotificationCategory(identifier: "reminderCategory", actions: [stopAction], intentIdentifiers: [], options: [])
 
         UNUserNotificationCenter.current().setNotificationCategories([category])
 
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-        let request = UNNotificationRequest(identifier: "reminder", content: content, trigger: trigger)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
+        let identifier = "reminder-\(UUID().uuidString)"
+        let request = UNNotificationRequest(identifier: identifier, content: self.content, trigger: trigger)
 
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error {
@@ -49,9 +50,13 @@ protocol TimerHandleDelegate: AnyObject {
 }
 
 extension NotificationItem: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.sound, .banner])
+    }
+
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         if response.actionIdentifier == "stopAction" {
-            timerConfig?.invalidateTimers()
+            self.timerConfig?.invalidateTimers()
         }
         completionHandler()
     }
