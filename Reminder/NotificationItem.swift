@@ -1,72 +1,58 @@
-//
-//  Notification.swift
-//  Reminder
-//
-//  Created by Владимир Малышев on 06.07.2023.
-//
-
 import Cocoa
 import UserNotifications
 
-class NotificationItem:NSObject {
-    private let content =  UNMutableNotificationContent()
+class NotificationItem: NSObject {
+    private let content = UNMutableNotificationContent()
     var timerConfig: TimerConfiguration?
-    
-    init(title:String,body:String,sound:UNNotificationSound,categoryIdentifier:String) {
+
+    init(title: String, body: String, sound: UNNotificationSound, categoryIdentifier: String) {
         super.init()
         self.content.title = title
         self.content.body = body
         self.content.sound = sound
         self.content.categoryIdentifier = categoryIdentifier
-        
+
         UNUserNotificationCenter.current().delegate = self
-//        print("Notification \(self) is inited")
     }
-    
+
     deinit {
-//        print("Notification \(self) is deinited")
     }
-    
-    static func createRequestAuthorization () {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+
+    static func createRequestAuthorization() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { _, error in
             if let error = error {
                 print("Error requesting authorization for notifications: \(error.localizedDescription)")
             }
         }
     }
-    
+
     func configNotificationCenter() {
         let stopAction = UNNotificationAction(identifier: "stopAction", title: "Stop", options: [])
         let category = UNNotificationCategory(identifier: "reminderCategory", actions: [stopAction], intentIdentifiers: [], options: [])
-        
+
         UNUserNotificationCenter.current().setNotificationCategories([category])
-        
+
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
         let request = UNNotificationRequest(identifier: "reminder", content: content, trigger: trigger)
 
         UNUserNotificationCenter.current().add(request) { error in
-            if let error = error {  
+            if let error = error {
                 print("Error scheduling notification: \(error.localizedDescription)")
             }
         }
     }
-    
+
 }
 
+protocol TimerHandleDelegate: AnyObject {
 
-protocol TimerHandleDelegate {
-    
 }
 
-extension NotificationItem:UNUserNotificationCenterDelegate {
+extension NotificationItem: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        // Handle the "Stop" action
-           if response.actionIdentifier == "stopAction" {
-               timerConfig?.invalidateTimers()
-           }
-
-           // Call the completion handler
-           completionHandler()
+        if response.actionIdentifier == "stopAction" {
+            timerConfig?.invalidateTimers()
+        }
+        completionHandler()
     }
 }
-

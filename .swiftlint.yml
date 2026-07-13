@@ -1,0 +1,12 @@
+opt_in_rules:
+  - sorted_imports
+
+disabled_rules:
+  - trailing_comma
+  - line_length
+  - redundant_self
+
+identifier_name:
+  min_length: 2
+
+indentation: 4

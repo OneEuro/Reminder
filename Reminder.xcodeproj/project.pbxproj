@@ -3,13 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 71;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A0000000000000000000004 /* DrumrollTimePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 9A0000000000000000000002 /* DrumrollTimePicker */; };
+		9A0000000000000000000006 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0000000000000000000005 /* main.swift */; };
 		E726FF792A52E63300D32152 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E726FF782A52E63300D32152 /* AppDelegate.swift */; };
 		E726FF7D2A52E63800D32152 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E726FF7C2A52E63800D32152 /* Assets.xcassets */; };
-		E726FF802A52E63800D32152 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E726FF7E2A52E63800D32152 /* Main.storyboard */; };
 		E726FF882A52E70500D32152 /* ReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E726FF872A52E70500D32152 /* ReminderViewController.swift */; };
 		E726FF8C2A52E82400D32152 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E726FF8B2A52E82400D32152 /* EventMonitor.swift */; };
 		E7995C192A57169E00537F2F /* TimerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7995C182A57169E00537F2F /* TimerConfiguration.swift */; };
@@ -19,10 +20,10 @@
 
 /* Begin PBXFileReference section */
 		18ACB30D2D663E1B00DF9FC6 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		9A0000000000000000000005 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		E726FF752A52E63300D32152 /* Reminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E726FF782A52E63300D32152 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E726FF7C2A52E63800D32152 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		E726FF7F2A52E63800D32152 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E726FF812A52E63800D32152 /* Reminder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Reminder.entitlements; sourceTree = "<group>"; };
 		E726FF872A52E70500D32152 /* ReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderViewController.swift; sourceTree = "<group>"; };
 		E726FF8B2A52E82400D32152 /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
@@ -36,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A0000000000000000000004 /* DrumrollTimePicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,9 +70,9 @@
 				E7995C182A57169E00537F2F /* TimerConfiguration.swift */,
 				E7995C1A2A571C3B00537F2F /* NotificationItem.swift */,
 				E726FF7C2A52E63800D32152 /* Assets.xcassets */,
-				E726FF7E2A52E63800D32152 /* Main.storyboard */,
 				E726FF812A52E63800D32152 /* Reminder.entitlements */,
 				E7C360F02BA9ECBB000F77DC /* PickerView.swift */,
+				9A0000000000000000000005 /* main.swift */,
 			);
 			path = Reminder;
 			sourceTree = "<group>";
@@ -89,8 +91,12 @@
 			buildRules = (
 			);
 			dependencies = (
+				184BD9B23004F55B00D5B6D0 /* PBXTargetDependency */,
 			);
 			name = Reminder;
+			packageProductDependencies = (
+				9A0000000000000000000002 /* DrumrollTimePicker */,
+			);
 			productName = Reminder;
 			productReference = E726FF752A52E63300D32152 /* Reminder.app */;
 			productType = "com.apple.product-type.application";
@@ -111,14 +117,17 @@
 				};
 			};
 			buildConfigurationList = E726FF702A52E63300D32152 /* Build configuration list for PBXProject "Reminder" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 16.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 			);
 			mainGroup = E726FF6C2A52E63300D32152;
+			packageReferences = (
+				9A0000000000000000000000 /* XCRemoteSwiftPackageReference "DrumrollTimePicker" */,
+				9A0000000000000000000001 /* XCRemoteSwiftPackageReference "SwiftLint" */,
+			);
 			productRefGroup = E726FF762A52E63300D32152 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -134,7 +143,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E726FF7D2A52E63800D32152 /* Assets.xcassets in Resources */,
-				E726FF802A52E63800D32152 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,21 +159,18 @@
 				E726FF792A52E63300D32152 /* AppDelegate.swift in Sources */,
 				E726FF882A52E70500D32152 /* ReminderViewController.swift in Sources */,
 				E726FF8C2A52E82400D32152 /* EventMonitor.swift in Sources */,
+				9A0000000000000000000006 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		E726FF7E2A52E63800D32152 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E726FF7F2A52E63800D32152 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
+/* Begin PBXTargetDependency section */
+		184BD9B23004F55B00D5B6D0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 184BD9B13004F55B00D5B6D0 /* SwiftLintBuildToolPlugin */;
 		};
-/* End PBXVariantGroup section */
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		E726FF822A52E63800D32152 /* Debug */ = {
@@ -220,7 +225,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -276,7 +281,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -292,6 +297,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Reminder/Reminder.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -299,16 +305,16 @@
 				DEVELOPMENT_TEAM = 69U2WLS9CL;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Reminder;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSMainStoryboardFile = Main;
-				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.1;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.innotech.Reminder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -323,6 +329,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Reminder/Reminder.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -330,16 +337,16 @@
 				DEVELOPMENT_TEAM = 69U2WLS9CL;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Reminder;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSMainStoryboardFile = Main;
-				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.1;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.innotech.Reminder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -369,6 +376,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9A0000000000000000000000 /* XCRemoteSwiftPackageReference "DrumrollTimePicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OneEuro/DrumrollTimePicker.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		9A0000000000000000000001 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/SwiftLint.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.65.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		184BD9B13004F55B00D5B6D0 /* SwiftLintBuildToolPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9A0000000000000000000001 /* XCRemoteSwiftPackageReference "SwiftLint" */;
+			productName = "plugin:SwiftLintBuildToolPlugin";
+		};
+		9A0000000000000000000002 /* DrumrollTimePicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9A0000000000000000000000 /* XCRemoteSwiftPackageReference "DrumrollTimePicker" */;
+			productName = DrumrollTimePicker;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E726FF6D2A52E63300D32152 /* Project object */;
 }

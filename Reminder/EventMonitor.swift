@@ -6,8 +6,6 @@
 //
 import Cocoa
 
-import Cocoa
-
 /// A class to monitor global events and execute a handler when the specified events occur.
 public class EventMonitor {
     private var monitor: Any?

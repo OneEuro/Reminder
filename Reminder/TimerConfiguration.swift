@@ -4,11 +4,7 @@
 //
 //  Created by Владимир Малышев on 06.07.2023.
 //
-
 import Cocoa
-
-
-import Foundation
 
 class TimerConfiguration: NSObject {
     // MARK: - Properties
