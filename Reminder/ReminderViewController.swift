@@ -27,6 +27,7 @@ class ReminderViewController: NSViewController {
         self.timerConfiguration.reminderViewController = self
         setupUI()
         setupConstraints()
+        SettingsManager.shared.register(self.timePicker)
         NotificationItem.createRequestAuthorization()
     }
 

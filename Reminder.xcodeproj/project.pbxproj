@@ -16,6 +16,8 @@
 		E7995C192A57169E00537F2F /* TimerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7995C182A57169E00537F2F /* TimerConfiguration.swift */; };
 		E7995C1B2A571C3B00537F2F /* NotificationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7995C1A2A571C3B00537F2F /* NotificationItem.swift */; };
 		E7C360F12BA9ECBB000F77DC /* PickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C360F02BA9ECBB000F77DC /* PickerView.swift */; };
+		9A0000000000000000000009 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0000000000000000000007 /* SettingsManager.swift */; };
+		9A000000000000000000000A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0000000000000000000008 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		E7995C182A57169E00537F2F /* TimerConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerConfiguration.swift; sourceTree = "<group>"; };
 		E7995C1A2A571C3B00537F2F /* NotificationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationItem.swift; sourceTree = "<group>"; };
 		E7C360F02BA9ECBB000F77DC /* PickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerView.swift; sourceTree = "<group>"; };
+		9A0000000000000000000007 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
+		9A0000000000000000000008 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +76,8 @@
 				E726FF7C2A52E63800D32152 /* Assets.xcassets */,
 				E726FF812A52E63800D32152 /* Reminder.entitlements */,
 				E7C360F02BA9ECBB000F77DC /* PickerView.swift */,
+				9A0000000000000000000007 /* SettingsManager.swift */,
+				9A0000000000000000000008 /* SettingsViewController.swift */,
 				9A0000000000000000000005 /* main.swift */,
 			);
 			path = Reminder;
@@ -160,6 +166,8 @@
 				E726FF882A52E70500D32152 /* ReminderViewController.swift in Sources */,
 				E726FF8C2A52E82400D32152 /* EventMonitor.swift in Sources */,
 				9A0000000000000000000006 /* main.swift in Sources */,
+				9A0000000000000000000009 /* SettingsManager.swift in Sources */,
+				9A000000000000000000000A /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
