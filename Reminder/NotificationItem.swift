@@ -15,9 +15,6 @@ class NotificationItem: NSObject {
         UNUserNotificationCenter.current().delegate = self
     }
 
-    deinit {
-    }
-
     static func createRequestAuthorization() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { _, error in
             if let error = error {
@@ -42,11 +39,6 @@ class NotificationItem: NSObject {
             }
         }
     }
-
-}
-
-protocol TimerHandleDelegate: AnyObject {
-
 }
 
 extension NotificationItem: UNUserNotificationCenterDelegate {

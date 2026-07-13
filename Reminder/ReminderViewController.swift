@@ -242,9 +242,7 @@ class ReminderViewController: NSViewController {
         } else {
             self.countdownLabel.stringValue = String(format: "%02d:%02d", minutes, seconds)
         }
-        if totalSeconds <= 0 {
-            showPicker()
-        }
+
     }
 }
 

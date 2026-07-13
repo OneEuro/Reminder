@@ -8,8 +8,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     var eventMonitor: EventMonitor?
 
-    var reminderVC: ReminderViewController?
-
     private var settingsWindowController: SettingsWindowController?
 
     private var contextMenu: NSMenu?
@@ -29,9 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func setupPopover() {
-        let vc = ReminderViewController()
-        self.reminderVC = vc
-        self.popover.contentViewController = vc
+        self.popover.contentViewController = ReminderViewController()
     }
 
     private func setupEventMonitor() {

@@ -1,7 +1,7 @@
 import Cocoa
 import UserNotifications
 
-class TimerConfiguration: NSObject {
+class TimerConfiguration {
     // MARK: - Properties
 
     private var timer: Timer?
@@ -13,13 +13,13 @@ class TimerConfiguration: NSObject {
 
     weak var reminderViewController: ReminderViewController?
 
-    // MARK: - Public Methods
+    // MARK: - Methods
 
     var isRunning: Bool {
         self.timer != nil || self.countdownTimer != nil || self.notificationRepeatTimer != nil
     }
 
-    public func updateTimeInterval(with interval: TimeInterval) {
+    func updateTimeInterval(with interval: TimeInterval) {
         guard interval > 0 else {
             print("Invalid time interval. Please provide a positive number.")
             return
@@ -28,7 +28,7 @@ class TimerConfiguration: NSObject {
         self.remainingTime = self.timeInterval
     }
 
-    public func createNotification() {
+    func createNotification() {
         self.notificationItem = NotificationItem(
             title: "Reminder",
             body: "It's time!",
@@ -45,7 +45,7 @@ class TimerConfiguration: NSObject {
         notification.timerConfig = self
     }
 
-    public func createTimer() {
+    func createTimer() {
         invalidateTimers()
 
         self.remainingTime = self.timeInterval
@@ -63,7 +63,7 @@ class TimerConfiguration: NSObject {
         createCountdownTimer()
     }
 
-    internal func createCountdownTimer() {
+    func createCountdownTimer() {
         self.countdownTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
             guard let self = self else { return }
 
@@ -103,7 +103,7 @@ class TimerConfiguration: NSObject {
         return String(format: "%02d:%02d", minutes, seconds)
     }
 
-    public func invalidateTimers() {
+    func invalidateTimers() {
         self.timer?.invalidate()
         self.countdownTimer?.invalidate()
         self.timer = nil
