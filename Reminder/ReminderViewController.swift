@@ -34,7 +34,28 @@ class ReminderViewController: NSViewController {
         setupConstraints()
         SettingsManager.shared.register(self.timePicker)
         NotificationItem.createRequestAuthorization()
+        restoreLastTime()
         startPreviewTimer()
+    }
+
+    private func restoreLastTime() {
+        let defaults = UserDefaults.standard
+        let hour = defaults.integer(forKey: "lastSelectedHour")
+        let minute = defaults.integer(forKey: "lastSelectedMinute")
+        let second = defaults.integer(forKey: "lastSelectedSecond")
+        if hour > 0 || minute > 0 || second > 0 {
+            self.timePicker.setTime(hour: hour, minute: minute, second: second, animated: false)
+        } else {
+            self.timePicker.setTime(hour: 0, minute: 0, second: 0, animated: false)
+        }
+    }
+
+    private func saveLastTime() {
+        guard let selected = self.timePicker.selectedTime else { return }
+        let defaults = UserDefaults.standard
+        defaults.set(selected.hour, forKey: "lastSelectedHour")
+        defaults.set(selected.minute, forKey: "lastSelectedMinute")
+        defaults.set(selected.second, forKey: "lastSelectedSecond")
     }
 
     private func startPreviewTimer() {
@@ -113,6 +134,7 @@ class ReminderViewController: NSViewController {
             .foregroundColor: NSColor.systemRed,
             .font: NSFont.boldSystemFont(ofSize: 13),
         ])
+        stopButton.isEnabled = false
         stopButton.action = #selector(stopTimer)
         stopButton.target = self
         self.view.addSubview(stopButton)
@@ -157,6 +179,7 @@ class ReminderViewController: NSViewController {
         self.timePicker.isHidden = false
         self.countdownLabel.isHidden = true
         self.startButton.isHidden = false
+        self.stopButton.isEnabled = false
         if let trailing = self.stopButtonTrailing, let center = self.stopButtonCenter {
             NSLayoutConstraint.deactivate([center])
             NSLayoutConstraint.activate([trailing])
@@ -167,6 +190,7 @@ class ReminderViewController: NSViewController {
         self.timePicker.isHidden = true
         self.countdownLabel.isHidden = false
         self.startButton.isHidden = true
+        self.stopButton.isEnabled = true
         if let trailing = self.stopButtonTrailing, let center = self.stopButtonCenter {
             NSLayoutConstraint.deactivate([trailing])
             NSLayoutConstraint.activate([center])
@@ -179,6 +203,7 @@ class ReminderViewController: NSViewController {
         guard let selected = timePicker.selectedTime else { return }
         let totalSeconds = TimeInterval(selected.hour * 3600 + selected.minute * 60 + selected.second)
         guard totalSeconds > 0 else { return }
+        saveLastTime()
         self.countdownLabel.stringValue = self.timerConfiguration.remainingTimeString(from: totalSeconds)
         showCountdown()
         self.timerConfiguration.updateTimeInterval(with: totalSeconds)
