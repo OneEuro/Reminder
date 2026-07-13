@@ -35,7 +35,7 @@ Right-click the menu bar icon to open Settings.
 Download the latest `Reminder.app` from Releases, or build from source:
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/OneEuro/Reminder.git
 cd Reminder
 xcodebuild -project Reminder.xcodeproj -scheme Reminder build
 ```
