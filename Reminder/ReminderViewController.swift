@@ -5,11 +5,11 @@ class ReminderViewController: NSViewController {
 
     // MARK: - Properties
 
-    private let quitButton = NSButton()
+    private let quitButton = DimmingButton()
     private let titleLabel = NSTextField(labelWithString: "Reminder")
     private let timePicker = DrumrollTimePicker()
-    private let startButton = NSButton()
-    private let stopButton = NSButton()
+    private let startButton = DimmingButton()
+    private let stopButton = DimmingButton()
     private let countdownLabel = NSTextField()
 
     private var timerConfiguration = TimerConfiguration()
@@ -17,7 +17,7 @@ class ReminderViewController: NSViewController {
     // MARK: - Lifecycle
 
     override func loadView() {
-        self.view = NSView(frame: NSRect(x: 0, y: 0, width: 480, height: 270))
+        self.view = NSView(frame: NSRect(x: 0, y: 0, width: 480, height: 340))
         self.view.wantsLayer = true
         self.view.layer?.backgroundColor = NSColor.black.cgColor
     }
@@ -34,11 +34,12 @@ class ReminderViewController: NSViewController {
     // MARK: - Setup
 
     private func setupUI() {
-        let white: [NSAttributedString.Key: Any] = [.foregroundColor: NSColor.white]
-
         quitButton.translatesAutoresizingMaskIntoConstraints = false
-        quitButton.attributedTitle = NSAttributedString(string: "Выход", attributes: white)
-        quitButton.bezelStyle = .rounded
+        quitButton.isBordered = false
+        quitButton.wantsLayer = true
+        quitButton.title = ""
+        quitButton.layer?.backgroundColor = NSColor(red: 0.78, green: 0.18, blue: 0.16, alpha: 1.0).cgColor
+        quitButton.layer?.cornerRadius = 6
         quitButton.action = #selector(closeProgram)
         quitButton.target = self
         self.view.addSubview(quitButton)
@@ -64,15 +65,27 @@ class ReminderViewController: NSViewController {
         self.view.addSubview(countdownLabel)
 
         startButton.translatesAutoresizingMaskIntoConstraints = false
-        startButton.attributedTitle = NSAttributedString(string: "Start", attributes: white)
-        startButton.bezelStyle = .rounded
+        startButton.isBordered = false
+        startButton.wantsLayer = true
+        startButton.layer?.backgroundColor = NSColor.systemGreen.withAlphaComponent(0.15).cgColor
+        startButton.layer?.cornerRadius = 22
+        startButton.attributedTitle = NSAttributedString(string: "Start", attributes: [
+            .foregroundColor: NSColor.systemGreen,
+            .font: NSFont.boldSystemFont(ofSize: 13),
+        ])
         startButton.action = #selector(startTimer)
         startButton.target = self
         self.view.addSubview(startButton)
 
         stopButton.translatesAutoresizingMaskIntoConstraints = false
-        stopButton.attributedTitle = NSAttributedString(string: "Stop", attributes: white)
-        stopButton.bezelStyle = .rounded
+        stopButton.isBordered = false
+        stopButton.wantsLayer = true
+        stopButton.layer?.backgroundColor = NSColor.systemRed.withAlphaComponent(0.15).cgColor
+        stopButton.layer?.cornerRadius = 22
+        stopButton.attributedTitle = NSAttributedString(string: "Stop", attributes: [
+            .foregroundColor: NSColor.systemRed,
+            .font: NSFont.boldSystemFont(ofSize: 13),
+        ])
         stopButton.action = #selector(stopTimer)
         stopButton.target = self
         self.view.addSubview(stopButton)
@@ -80,30 +93,33 @@ class ReminderViewController: NSViewController {
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            quitButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20),
-            quitButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 48),
-            quitButton.widthAnchor.constraint(equalToConstant: 75),
+            quitButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 12),
+            quitButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 12),
+            quitButton.widthAnchor.constraint(equalToConstant: 12),
+            quitButton.heightAnchor.constraint(equalToConstant: 12),
 
-            titleLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 53),
-            titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 20),
+            titleLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 12),
+            titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
 
-            timePicker.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
+            timePicker.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 32),
             timePicker.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             timePicker.widthAnchor.constraint(equalToConstant: 260),
-            timePicker.heightAnchor.constraint(equalToConstant: 190),
+            timePicker.heightAnchor.constraint(equalToConstant: 170),
 
             countdownLabel.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
             countdownLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 40),
             countdownLabel.widthAnchor.constraint(equalToConstant: 70),
 
-            startButton.topAnchor.constraint(equalTo: timePicker.bottomAnchor, constant: 24),
-            startButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            startButton.widthAnchor.constraint(equalToConstant: 64),
-
-            stopButton.topAnchor.constraint(equalTo: startButton.bottomAnchor, constant: 12),
-            stopButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            stopButton.widthAnchor.constraint(equalToConstant: 63),
+            stopButton.topAnchor.constraint(equalTo: timePicker.bottomAnchor, constant: 8),
+            stopButton.trailingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: -10),
+            stopButton.widthAnchor.constraint(equalToConstant: 44),
+            stopButton.heightAnchor.constraint(equalToConstant: 44),
             stopButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20),
+
+            startButton.topAnchor.constraint(equalTo: timePicker.bottomAnchor, constant: 8),
+            startButton.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 10),
+            startButton.widthAnchor.constraint(equalToConstant: 44),
+            startButton.heightAnchor.constraint(equalToConstant: 44),
         ])
     }
 
@@ -131,5 +147,14 @@ class ReminderViewController: NSViewController {
         let minutes = Int(remainingTime) / 60
         let seconds = Int(remainingTime) % 60
         self.countdownLabel.stringValue = String(format: "%02d:%02d", minutes, seconds)
+    }
+}
+
+final class DimmingButton: NSButton {
+
+    override func mouseDown(with event: NSEvent) {
+        self.layer?.opacity = 0.4
+        super.mouseDown(with: event)
+        self.layer?.opacity = 1.0
     }
 }
