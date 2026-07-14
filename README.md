@@ -27,7 +27,7 @@ Right-click the menu bar icon to open Settings.
 
 ## Requirements
 
-- macOS 14.0+
+- macOS 13.0+
 - Apple Silicon or Intel Mac
 
 ## Installation
