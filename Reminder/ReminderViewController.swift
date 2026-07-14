@@ -100,7 +100,7 @@ class ReminderViewController: NSViewController {
 
         timePicker.translatesAutoresizingMaskIntoConstraints = false
         timePicker.showsSeconds = true
-        timePicker.itemSpacing = 16
+        timePicker.itemSpacing = 28
         timePicker.selectionBarOffsetY = 6
         self.view.addSubview(timePicker)
 
@@ -159,7 +159,7 @@ class ReminderViewController: NSViewController {
 
             timePicker.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 32),
             timePicker.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            timePicker.widthAnchor.constraint(equalToConstant: 260),
+            timePicker.widthAnchor.constraint(equalToConstant: 440),
             timePicker.heightAnchor.constraint(equalToConstant: 170),
 
             countdownLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),

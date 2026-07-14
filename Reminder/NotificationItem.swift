@@ -46,7 +46,7 @@ extension NotificationItem: UNUserNotificationCenterDelegate {
         if #available(macOS 14, *) {
             completionHandler([.sound, .banner])
         } else {
-            completionHandler([.sound, .alert])
+            completionHandler([.sound, UNNotificationPresentationOptions(rawValue: 4)])
         }
     }
 
