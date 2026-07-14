@@ -43,7 +43,11 @@ class NotificationItem: NSObject {
 
 extension NotificationItem: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.sound, .banner])
+        if #available(macOS 14, *) {
+            completionHandler([.sound, .banner])
+        } else {
+            completionHandler([.sound, .alert])
+        }
     }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
